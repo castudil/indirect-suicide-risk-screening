@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+title: "Indirect screening for adolescent suicidal risk — analysis code"
+message: "If you use this software, please cite both the software and the associated paper."
+type: software
+authors:
+  - family-names: "Martínez"
+    given-names: "Ignacio"
+    orcid: "https://orcid.org/0009-0009-6882-1546"
+    affiliation: "Universidad de Talca"
+  - family-names: "Astudillo"
+    given-names: "César"
+    orcid: "https://orcid.org/0000-0002-2109-3192"
+    affiliation: "Universidad de Talca"
+  - family-names: "Núñez"
+    given-names: "Daniel"
+    orcid: "https://orcid.org/0000-0001-7091-2249"
+    affiliation: "Universidad de Talca"
+license: MIT

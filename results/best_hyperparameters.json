@@ -1,0 +1,36 @@
+{
+    "Logistic Regression": {
+        "C": 0.04935326607350617,
+        "penalty": "l1"
+    },
+    "Random Forest": {
+        "max_depth": 2,
+        "max_features": "sqrt",
+        "n_estimators": 1000
+    },
+    "Gradient Boosting": {
+        "learning_rate": 0.051289183375662684,
+        "max_depth": 1,
+        "n_estimators": 1000,
+        "subsample": 0.5
+    },
+    "SVM": {
+        "C": 94.30241529230832,
+        "coef0": 1.0,
+        "degree": 2,
+        "gamma": 5.3884033408526984e-05,
+        "kernel": "sigmoid"
+    },
+    "KNN": {
+        "n_neighbors": 3,
+        "p": 2,
+        "weights": "distance"
+    },
+    "XGBoost": {
+        "colsample_bytree": 0.3,
+        "learning_rate": 0.0038993262573047264,
+        "max_depth": 2,
+        "n_estimators": 1000,
+        "subsample": 0.5
+    }
+}

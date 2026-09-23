@@ -1,0 +1,7 @@
+Mechanism,Label-free score,Label-free PR AUC,Crossover (noise level),Supervised PR AUC @0.39
+severity-targeted,S1 Robust Z-Score (MAD),0.7295534159180366,>0.39,0.7382290975003301
+severity-targeted,S3 Sum of z (distress),0.7710070604637808,0.0,0.7382290975003301
+severity-targeted,S5 PC1 (p-factor),0.7390496532248282,0.3,0.7382290975003301
+uniform random (control),S1 Robust Z-Score (MAD),0.7295534159180366,>0.39,0.7302352807603382
+uniform random (control),S3 Sum of z (distress),0.7710070604637808,0.0,0.7302352807603382
+uniform random (control),S5 PC1 (p-factor),0.7390496532248282,0.2,0.7302352807603382

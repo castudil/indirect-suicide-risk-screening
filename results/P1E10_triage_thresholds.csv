@@ -1,0 +1,4 @@
+Tier,n,True cases,Tier precision,Cumulative recall,Cumulative NNS
+Tier 1: High alert ($p\ge0.78$),33,30,0.9090909090909091,0.3409090909090909,1.1
+Tier 2: Elevated ($0.15\le p<0.78$),120,47,0.39166666666666666,0.875,1.9870129870129871
+Tier 3: Standard ($p<0.15$),309,11,0.03559870550161812,,

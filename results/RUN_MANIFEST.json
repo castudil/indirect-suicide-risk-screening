@@ -1,0 +1,599 @@
+[
+  {
+    "run_id": "P1-E1",
+    "title": "Leave-One-School-Out CV (21 establecimientos)",
+    "script": "p1_experiments.py",
+    "script_sha256": "3da4e00512f3185e47f3fa6c002e9a897fe64a3043a47df77f82a418ae8da566",
+    "seed": 42,
+    "notes": "The design is a cluster-RCT; the original 70/30 split is at participant level, so students from the same school appear in both train and test. LOSO corrects this cluster leakage and provides quasi-external validation by site.",
+    "timestamp_utc": "2026-09-23T00:57:29+00:00",
+    "environment": {
+      "python": "3.12.14",
+      "platform": "macOS-26.5.2-arm64-arm-64bit",
+      "packages": {
+        "numpy": "2.5.3",
+        "pandas": "3.0.6",
+        "scipy": "1.18.1",
+        "sklearn": "1.9.1",
+        "statsmodels": "0.15.0",
+        "matplotlib": "3.11.2"
+      }
+    },
+    "inputs": {
+      "datos.csv": "89ffc7a547097fead707049a2804b0ceb43610c754ffc8f2ff53d2df9ee016f8",
+      "_cohort.py": "b026780b7fc9027c1fa04845e5d40ca7d3d94827954bd6aa9d602836bf8dbc67"
+    },
+    "outputs": {
+      "results/P1E1_loso_per_school.csv": {
+        "sha256": "58af1e309c56d03bb0c2304eab24ce8b2dbf4b687f6daa015e15bd7937cb74c1",
+        "bytes": 1116,
+        "description": "AUC/Recall/F2 per school"
+      },
+      "results/P1E1_loso_forest.pdf": {
+        "sha256": "3c0c4b90204a6d44533701e5ec24a58b14263eb60087296a185336e6c0a6ed44",
+        "bytes": 21574,
+        "description": "Forest plot for the manuscript"
+      },
+      "results/P1E1_loso_forest.png": {
+        "sha256": "977e7ea4a4a43b58744400283470cbf122f6945d4c0f5d5cccb3414aa63b6b9e",
+        "bytes": 124072,
+        "description": ""
+      }
+    },
+    "findings": {
+      "auc_mean": {
+        "value": 0.897,
+        "note": ""
+      },
+      "auc_sd": {
+        "value": 0.0815,
+        "note": ""
+      },
+      "auc_weighted": {
+        "value": 0.9096,
+        "note": "weighted by school size"
+      },
+      "auc_range": {
+        "value": [
+          0.6552,
+          1.0
+        ],
+        "note": ""
+      },
+      "recall_mean": {
+        "value": 0.8556,
+        "note": ""
+      },
+      "schools_evaluable": {
+        "value": 21,
+        "note": "of 21 (single-class folds excluded)"
+      }
+    }
+  },
+  {
+    "run_id": "P1-E2",
+    "title": "Criterion-contamination sensitivity (BHS / BHS+CAPE excluded)",
+    "script": "p1_experiments.py",
+    "script_sha256": "3da4e00512f3185e47f3fa6c002e9a897fe64a3043a47df77f82a418ae8da566",
+    "seed": 42,
+    "notes": "The BHS (hopelessness) and CAPE-P15 share semantic variance with the SIQ-JR. If performance holds when they are excluded, the indirect design does not depend on items close to the outcome construct.",
+    "timestamp_utc": "2026-09-23T00:57:30+00:00",
+    "environment": {
+      "python": "3.12.14",
+      "platform": "macOS-26.5.2-arm64-arm-64bit",
+      "packages": {
+        "numpy": "2.5.3",
+        "pandas": "3.0.6",
+        "scipy": "1.18.1",
+        "sklearn": "1.9.1",
+        "statsmodels": "0.15.0",
+        "matplotlib": "3.11.2"
+      }
+    },
+    "inputs": {
+      "datos.csv": "89ffc7a547097fead707049a2804b0ceb43610c754ffc8f2ff53d2df9ee016f8",
+      "_cohort.py": "b026780b7fc9027c1fa04845e5d40ca7d3d94827954bd6aa9d602836bf8dbc67"
+    },
+    "outputs": {
+      "results/P1E2_criterion_sensitivity.csv": {
+        "sha256": "8d2752c6eb7880f476ace0b2edad841582bffa5d096f7912fceca6906e47ba4a",
+        "bytes": 528,
+        "description": "Performance by scale subset"
+      }
+    },
+    "findings": {
+      "recall_full": {
+        "value": 0.8409,
+        "note": ""
+      },
+      "recall_without_bhs": {
+        "value": 0.8068,
+        "note": ""
+      },
+      "recall_without_bhs_cape": {
+        "value": 0.8182,
+        "note": ""
+      },
+      "auc_without_bhs_cape": {
+        "value": 0.9073,
+        "note": ""
+      }
+    }
+  },
+  {
+    "run_id": "P1-E3",
+    "title": "Decision curve analysis and number needed to screen per tier",
+    "script": "p1_experiments.py",
+    "script_sha256": "3da4e00512f3185e47f3fa6c002e9a897fe64a3043a47df77f82a418ae8da566",
+    "seed": 42,
+    "notes": "Net benefit translates calibration into clinical utility and is the analysis clinical editors expect. NNS expresses the operational cost per tier.",
+    "timestamp_utc": "2026-09-23T00:57:30+00:00",
+    "environment": {
+      "python": "3.12.14",
+      "platform": "macOS-26.5.2-arm64-arm-64bit",
+      "packages": {
+        "numpy": "2.5.3",
+        "pandas": "3.0.6",
+        "scipy": "1.18.1",
+        "sklearn": "1.9.1",
+        "statsmodels": "0.15.0",
+        "matplotlib": "3.11.2"
+      }
+    },
+    "inputs": {
+      "datos.csv": "89ffc7a547097fead707049a2804b0ceb43610c754ffc8f2ff53d2df9ee016f8",
+      "_cohort.py": "b026780b7fc9027c1fa04845e5d40ca7d3d94827954bd6aa9d602836bf8dbc67"
+    },
+    "outputs": {
+      "results/P1E3_triage_tiers_nns.csv": {
+        "sha256": "895e658c1b0917a05983f35cd5f3c3da8a4c7599d516082a9ea853223ed4d8f2",
+        "bytes": 228,
+        "description": "Triage tiers with NNS"
+      },
+      "results/P1E3_net_benefit_curve.csv": {
+        "sha256": "fe02be6e77142c25ca59edc48697d90b6d843b369e5fb54f5c3130d796761b4c",
+        "bytes": 8051,
+        "description": "Curva de beneficio neto"
+      },
+      "results/P1E3_decision_curve.pdf": {
+        "sha256": "1381ee0a86f07e4fc7d813b8f9ea0dffc08f9c27d79a5a9f63db89b35846d86b",
+        "bytes": 19828,
+        "description": "DCA figure for the manuscript"
+      },
+      "results/P1E3_decision_curve.png": {
+        "sha256": "52704350083e8543e473d361e8b5d1bbba1d0c47e3f17fb53a621eda00919e38",
+        "bytes": 66149,
+        "description": ""
+      }
+    },
+    "findings": {
+      "net_benefit_gain_at_p019": {
+        "value": 0.1259,
+        "note": "vs treat-all strategy"
+      },
+      "nns_tier1": {
+        "value": 1.11,
+        "note": ""
+      },
+      "nns_tier2": {
+        "value": 1.85,
+        "note": ""
+      },
+      "precision_tier1": {
+        "value": 0.9032,
+        "note": ""
+      }
+    }
+  },
+  {
+    "run_id": "P1-E4",
+    "title": "Feature-selection stability (1,000 L1 bootstraps)",
+    "script": "p1_experiments.py",
+    "script_sha256": "3da4e00512f3185e47f3fa6c002e9a897fe64a3043a47df77f82a418ae8da566",
+    "seed": 42,
+    "notes": "At EPV~1.9 individual coefficients are unstable. Selection frequency distinguishes a reproducible semantic prior from an anecdotal one.",
+    "timestamp_utc": "2026-09-23T00:57:30+00:00",
+    "environment": {
+      "python": "3.12.14",
+      "platform": "macOS-26.5.2-arm64-arm-64bit",
+      "packages": {
+        "numpy": "2.5.3",
+        "pandas": "3.0.6",
+        "scipy": "1.18.1",
+        "sklearn": "1.9.1",
+        "statsmodels": "0.15.0",
+        "matplotlib": "3.11.2"
+      }
+    },
+    "inputs": {
+      "datos.csv": "89ffc7a547097fead707049a2804b0ceb43610c754ffc8f2ff53d2df9ee016f8",
+      "_cohort.py": "b026780b7fc9027c1fa04845e5d40ca7d3d94827954bd6aa9d602836bf8dbc67"
+    },
+    "outputs": {
+      "results/P1E4_selection_stability.csv": {
+        "sha256": "e336474c7d000dcfe39762baad391da594ff8c22e202456b4a52dd4ae14e682f",
+        "bytes": 4368,
+        "description": "Selection frequency per variable"
+      }
+    },
+    "findings": {
+      "n_bootstraps": {
+        "value": 1000,
+        "note": ""
+      },
+      "n_final_predictors": {
+        "value": 35,
+        "note": ""
+      },
+      "n_stable_90": {
+        "value": 7,
+        "note": "selection frequency >= 90%"
+      },
+      "n_stable_50": {
+        "value": 26,
+        "note": "selection frequency >= 50%"
+      },
+      "n_unstable": {
+        "value": 9,
+        "note": "in the final model but selected < 50% of the time"
+      }
+    }
+  },
+  {
+    "run_id": "P1-E5",
+    "title": "Bootstrap internal validation with optimism correction (Harrell)",
+    "script": "p1_experiments.py",
+    "script_sha256": "3da4e00512f3185e47f3fa6c002e9a897fe64a3043a47df77f82a418ae8da566",
+    "seed": 42,
+    "notes": "Collins and Steyerberg regard split-sample validation as statistically inefficient. The bootstrap uses all 1,539 cases and estimates optimism directly.",
+    "timestamp_utc": "2026-09-23T00:57:39+00:00",
+    "environment": {
+      "python": "3.12.14",
+      "platform": "macOS-26.5.2-arm64-arm-64bit",
+      "packages": {
+        "numpy": "2.5.3",
+        "pandas": "3.0.6",
+        "scipy": "1.18.1",
+        "sklearn": "1.9.1",
+        "statsmodels": "0.15.0",
+        "matplotlib": "3.11.2"
+      }
+    },
+    "inputs": {
+      "datos.csv": "89ffc7a547097fead707049a2804b0ceb43610c754ffc8f2ff53d2df9ee016f8",
+      "_cohort.py": "b026780b7fc9027c1fa04845e5d40ca7d3d94827954bd6aa9d602836bf8dbc67"
+    },
+    "outputs": {
+      "results/P1E5_optimism_bootstrap.csv": {
+        "sha256": "a98d50822f0a9e0df46c9dd8f50b76bef1054cf35a25cbda6b09d9332ea7ed35",
+        "bytes": 216,
+        "description": "Optimism-corrected AUC / PR AUC"
+      }
+    },
+    "findings": {
+      "n_bootstraps": {
+        "value": 200,
+        "note": ""
+      },
+      "auc_corrected": {
+        "value": 0.925,
+        "note": ""
+      },
+      "prauc_corrected": {
+        "value": 0.728,
+        "note": ""
+      },
+      "optimism_auc": {
+        "value": 0.0158,
+        "note": ""
+      }
+    }
+  },
+  {
+    "run_id": "P1-E6",
+    "title": "Realistic comparator: distal risk factors vs the indirect model",
+    "script": "p1_experiments.py",
+    "script_sha256": "3da4e00512f3185e47f3fa6c002e9a897fe64a3043a47df77f82a418ae8da566",
+    "seed": 42,
+    "notes": "Replaces the Oracle experiment, which is circular because it predicts the SIQ-JR from SIQ-JR items. Distal factors are the screening that schools currently use, and therefore the honest comparator.",
+    "timestamp_utc": "2026-09-23T00:57:42+00:00",
+    "environment": {
+      "python": "3.12.14",
+      "platform": "macOS-26.5.2-arm64-arm-64bit",
+      "packages": {
+        "numpy": "2.5.3",
+        "pandas": "3.0.6",
+        "scipy": "1.18.1",
+        "sklearn": "1.9.1",
+        "statsmodels": "0.15.0",
+        "matplotlib": "3.11.2"
+      }
+    },
+    "inputs": {
+      "datos.csv": "89ffc7a547097fead707049a2804b0ceb43610c754ffc8f2ff53d2df9ee016f8",
+      "_cohort.py": "b026780b7fc9027c1fa04845e5d40ca7d3d94827954bd6aa9d602836bf8dbc67"
+    },
+    "outputs": {
+      "results/P1E6_distal_comparator.csv": {
+        "sha256": "fc02385b29f000c1e82a12765b168580811e291d17590dbff1449eeaffd2c361",
+        "bytes": 592,
+        "description": "Comparison against distal risk screening"
+      }
+    },
+    "findings": {
+      "recall_distal": {
+        "value": 0.6364,
+        "note": ""
+      },
+      "auc_distal": {
+        "value": 0.7072,
+        "note": ""
+      },
+      "recall_proposed": {
+        "value": 0.8409,
+        "note": ""
+      },
+      "delta_recall": {
+        "value": 0.2045,
+        "note": ""
+      }
+    }
+  },
+  {
+    "run_id": "P1-E7",
+    "title": "Advanced calibration: intercept, slope, ICI and Brier",
+    "script": "p1_experiments.py",
+    "script_sha256": "3da4e00512f3185e47f3fa6c002e9a897fe64a3043a47df77f82a418ae8da566",
+    "seed": 42,
+    "notes": "Van Calster requires slope and intercept; the Brier score alone conflates discrimination with calibration. We target moderate, not strong, calibration.",
+    "timestamp_utc": "2026-09-23T00:57:43+00:00",
+    "environment": {
+      "python": "3.12.14",
+      "platform": "macOS-26.5.2-arm64-arm-64bit",
+      "packages": {
+        "numpy": "2.5.3",
+        "pandas": "3.0.6",
+        "scipy": "1.18.1",
+        "sklearn": "1.9.1",
+        "statsmodels": "0.15.0",
+        "matplotlib": "3.11.2"
+      }
+    },
+    "inputs": {
+      "datos.csv": "89ffc7a547097fead707049a2804b0ceb43610c754ffc8f2ff53d2df9ee016f8",
+      "_cohort.py": "b026780b7fc9027c1fa04845e5d40ca7d3d94827954bd6aa9d602836bf8dbc67"
+    },
+    "outputs": {
+      "results/P1E7_calibration_advanced.csv": {
+        "sha256": "d809a96aba41d16de7809daa999b1fbf1be9b2e21adaa9f6705327b6d50bf79f",
+        "bytes": 266,
+        "description": "Van Calster hierarchy metrics"
+      }
+    },
+    "findings": {
+      "slope_uncalibrated": {
+        "value": 1.1038,
+        "note": "1.0 = perfect calibration; <1 indicates overconfidence"
+      },
+      "slope_calibrated": {
+        "value": 0.8859,
+        "note": ""
+      },
+      "ici_uncalibrated": {
+        "value": 0.1517,
+        "note": ""
+      },
+      "ici_calibrated": {
+        "value": 0.0273,
+        "note": ""
+      },
+      "brier_improvement_pct": {
+        "value": -29.63,
+        "note": ""
+      }
+    }
+  },
+  {
+    "run_id": "P1-E9",
+    "title": "Comparación contra puntajes totales de escala (objeción M1)",
+    "script": "p1_experiments.py",
+    "script_sha256": "3da4e00512f3185e47f3fa6c002e9a897fe64a3043a47df77f82a418ae8da566",
+    "seed": 42,
+    "notes": "This is the comparison any psychometrically trained reviewer will make: if three scale sums match the 108-item model, item-level resolution does not buy accuracy. It is reported explicitly rather than omitted.",
+    "timestamp_utc": "2026-09-23T00:57:43+00:00",
+    "environment": {
+      "python": "3.12.14",
+      "platform": "macOS-26.5.2-arm64-arm-64bit",
+      "packages": {
+        "numpy": "2.5.3",
+        "pandas": "3.0.6",
+        "scipy": "1.18.1",
+        "sklearn": "1.9.1",
+        "statsmodels": "0.15.0",
+        "matplotlib": "3.11.2"
+      }
+    },
+    "inputs": {
+      "datos.csv": "89ffc7a547097fead707049a2804b0ceb43610c754ffc8f2ff53d2df9ee016f8",
+      "_cohort.py": "b026780b7fc9027c1fa04845e5d40ca7d3d94827954bd6aa9d602836bf8dbc67"
+    },
+    "outputs": {
+      "results/P1E9_scale_totals.csv": {
+        "sha256": "3ac68a2999a7632c317ad8a12c46773e3b0cbb05b8de7f4b5720a41c078c3011",
+        "bytes": 563,
+        "description": "Comparison against aggregate scores"
+      }
+    },
+    "findings": {
+      "auc_three_totals": {
+        "value": 0.915,
+        "note": ""
+      },
+      "auc_item_level": {
+        "value": 0.9145,
+        "note": ""
+      },
+      "delta_auc": {
+        "value": -0.0004,
+        "note": "zero or negative = item-level resolution does not improve discrimination"
+      },
+      "delta_prauc": {
+        "value": 0.0118,
+        "note": ""
+      }
+    }
+  },
+  {
+    "run_id": "P1-E10",
+    "title": "Derivation of triage cut-points on calibrated probability",
+    "script": "p1_experiments.py",
+    "script_sha256": "3da4e00512f3185e47f3fa6c002e9a897fe64a3043a47df77f82a418ae8da566",
+    "seed": 42,
+    "notes": "The inherited 0.80/0.50 cut-points produced a protocol with Recall 0.614 while the abstract claimed 0.841. The new cut-points derive from prespecified clinical criteria applied to out-of-fold predictions on the TRAINING partition, never the hold-out.",
+    "timestamp_utc": "2026-09-23T00:57:43+00:00",
+    "environment": {
+      "python": "3.12.14",
+      "platform": "macOS-26.5.2-arm64-arm-64bit",
+      "packages": {
+        "numpy": "2.5.3",
+        "pandas": "3.0.6",
+        "scipy": "1.18.1",
+        "sklearn": "1.9.1",
+        "statsmodels": "0.15.0",
+        "matplotlib": "3.11.2"
+      }
+    },
+    "inputs": {
+      "datos.csv": "89ffc7a547097fead707049a2804b0ceb43610c754ffc8f2ff53d2df9ee016f8",
+      "_cohort.py": "b026780b7fc9027c1fa04845e5d40ca7d3d94827954bd6aa9d602836bf8dbc67"
+    },
+    "outputs": {
+      "results/P1E10_triage_thresholds.csv": {
+        "sha256": "e5fe51eba75eaaba8c96a2c0f9c01c64e2e621cbe4db955b991dc0147e07cd6b",
+        "bytes": 291,
+        "description": "Triage tiers with cumulative recall"
+      }
+    },
+    "findings": {
+      "cut_tier1": {
+        "value": 0.78,
+        "note": "precision >= 0.80 on training out-of-fold"
+      },
+      "cut_tier2": {
+        "value": 0.15,
+        "note": "recall >= 0.90 on training out-of-fold"
+      },
+      "recall_protocol": {
+        "value": 0.875,
+        "note": ""
+      },
+      "precision_protocol": {
+        "value": 0.5033,
+        "note": ""
+      },
+      "pct_cohort_flagged": {
+        "value": 33.1,
+        "note": ""
+      }
+    }
+  },
+  {
+    "run_id": "SUPPL",
+    "title": "Generation of the supplementary tables",
+    "script": "make_supplementary.py",
+    "script_sha256": "4ef39ca8e8a30596c3d19726964ee1cbe9a73b32d13862aa0408fd8cdc7372ed",
+    "seed": 42,
+    "notes": "S1 documents the exclusion protocol; S2 the complete inventory of 35 predictors with bootstrap selection frequency added.",
+    "timestamp_utc": "2026-09-23T00:57:44+00:00",
+    "environment": {
+      "python": "3.12.14",
+      "platform": "macOS-26.5.2-arm64-arm-64bit",
+      "packages": {
+        "numpy": "2.5.3",
+        "pandas": "3.0.6",
+        "scipy": "1.18.1",
+        "sklearn": "1.9.1",
+        "statsmodels": "0.15.0",
+        "matplotlib": "3.11.2"
+      }
+    },
+    "inputs": {
+      "results/selected_features_with_odds_ratios.csv": "ba6abbdd1b59e6fbb2b2a7279d592146a6b29e40a4e6312f4b17948fd5213278",
+      "results/P1E4_selection_stability.csv": "e336474c7d000dcfe39762baad391da594ff8c22e202456b4a52dd4ae14e682f",
+      "questionnaire.py": "09c4c7c895391adb73ee2cae57e27fb847fae9f7939cf1702132d40568f55890"
+    },
+    "outputs": {
+      "../paper/supplementary.tex": {
+        "sha256": "13219e8de81eee6290f3cfcbefc1a90ccbfa47dd972f3833d58f351381ebd77d",
+        "bytes": 16553,
+        "description": "Supplementary tables"
+      }
+    },
+    "findings": {
+      "n_predictores_S2": {
+        "value": 35,
+        "note": ""
+      },
+      "variables_sin_cruce": {
+        "value": "none",
+        "note": ""
+      }
+    }
+  },
+  {
+    "run_id": "P1-E8",
+    "title": "Label-noise robustness figure (carried over from E2)",
+    "script": "p1_experiments.py",
+    "script_sha256": "3da4e00512f3185e47f3fa6c002e9a897fe64a3043a47df77f82a418ae8da566",
+    "seed": 42,
+    "notes": "Result carried over from the discontinued unsupervised analysis: L1-LR discrimination is invariant to asymmetric label noise up to the 39% documented by Klimes-Dougan, turning a threat cited in the manuscript into a demonstrated strength. LIMITATION: noise was injected only in training; the hold-out ground truth is assumed clean.",
+    "timestamp_utc": "2026-09-23T00:58:48+00:00",
+    "environment": {
+      "python": "3.12.14",
+      "platform": "macOS-26.5.2-arm64-arm-64bit",
+      "packages": {
+        "numpy": "2.5.3",
+        "pandas": "3.0.6",
+        "scipy": "1.18.1",
+        "sklearn": "1.9.1",
+        "statsmodels": "0.15.0",
+        "matplotlib": "3.11.2"
+      }
+    },
+    "inputs": {
+      "datos.csv": "89ffc7a547097fead707049a2804b0ceb43610c754ffc8f2ff53d2df9ee016f8",
+      "_cohort.py": "b026780b7fc9027c1fa04845e5d40ca7d3d94827954bd6aa9d602836bf8dbc67",
+      "results/E2_label_noise_curves.csv": "e9011860ac6a306c29ce3285957eb48523660e479b7e017d1a93b712881f08bc"
+    },
+    "outputs": {
+      "results/P1E8_label_noise_robustness.pdf": {
+        "sha256": "aec10dbcb956d5babfce31c7b7dfe55a5011a3e7910e4f5f0bc84cb7fc058af9",
+        "bytes": 26960,
+        "description": "Robustness figure for the manuscript"
+      },
+      "results/P1E8_label_noise_robustness.png": {
+        "sha256": "4fcbae2ac678dbe1e0569a1c682ec13360fb39215ff1f165fb161716c16bfc17",
+        "bytes": 112968,
+        "description": ""
+      }
+    },
+    "findings": {
+      "prauc_noise_0": {
+        "value": 0.7415,
+        "note": ""
+      },
+      "prauc_noise_39": {
+        "value": 0.7382,
+        "note": ""
+      },
+      "degradation_prauc_pct": {
+        "value": -0.43,
+        "note": ""
+      },
+      "degradation_f2_pct": {
+        "value": -3.77,
+        "note": ""
+      }
+    }
+  }
+]

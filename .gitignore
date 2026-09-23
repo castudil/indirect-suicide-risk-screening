@@ -1,0 +1,8 @@
+# Individual-level data must never enter this repository.
+datos.csv
+*.sav
+*.xlsx
+.venv/
+__pycache__/
+.ipynb_checkpoints/
+.DS_Store

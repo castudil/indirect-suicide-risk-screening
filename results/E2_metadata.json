@@ -1,0 +1,20 @@
+{
+  "random_state": 42,
+  "n_reps": 100,
+  "noise_levels": [
+    0.0,
+    0.1,
+    0.2,
+    0.3,
+    0.39
+  ],
+  "fixed_capacity": 0.19,
+  "clean_train_prevalence": 0.1903435468895079,
+  "lf_prauc": {
+    "S1 Robust Z-Score (MAD)": 0.7295534159180366,
+    "S3 Sum of z (distress)": 0.7710070604637808,
+    "S5 PC1 (p-factor)": 0.7390496532248282
+  },
+  "sup_prauc_clean": 0.7414542028814343,
+  "sup_prauc_noise39": 0.7382290975003301
+}
