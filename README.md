@@ -1,5 +1,7 @@
 # Indirect screening for adolescent suicidal risk — analysis code
 
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.22907432.svg)](https://doi.org/10.5281/zenodo.22907432)
+
 Analysis code for:
 
 > Martínez, I., Astudillo, C., & Núñez, D. *Detecting high suicidal risk in adolescents without
@@ -93,7 +95,12 @@ hyperparameters selected by the Bayesian search they performed are recorded in
 
 ## Citation
 
-See `CITATION.cff`.
+Archived on Zenodo. The concept DOI below always resolves to the latest version:
+
+> Martínez, I., Astudillo, C., & Núñez, D. (2026). *Indirect screening for adolescent suicidal
+> risk — analysis code* (v1.0.0). Zenodo. https://doi.org/10.5281/zenodo.22907432
+
+Machine-readable metadata is in `CITATION.cff`.
 
 ## Licence
 
