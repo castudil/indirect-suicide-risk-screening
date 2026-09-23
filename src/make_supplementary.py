@@ -134,9 +134,9 @@ def build():
     A(r"\usepackage{booktabs}\usepackage{longtable}\usepackage{array}\usepackage{amsmath}\usepackage{amsbsy}\usepackage{graphicx}")
     A(r"\usepackage[T1]{fontenc}\usepackage[utf8]{inputenc}")
     A(r"\renewcommand{\arraystretch}{1.12}")
-    A(r"\title{Supplementary Material\\[4pt]\large Identification of Semantic Priors for Auditable"
-      r" Clinical Decision Support via Indirect Suicide Risk Detection}")
-    A(r"\author{Mart\'inez, Astudillo \& N\'u\~nez}\date{}")
+    A(r"\title{Supplementary Material\\[4pt]\large Detecting high suicidal risk in adolescents"
+      r" without asking about suicide: development and internal validation of a brief indirect screener}")
+    A(r"\author{Mart\'inez, N\'u\~nez \& Astudillo}\date{}")
     A(r"\begin{document}\maketitle")
 
     # ---------------------------------------------------------------- Tabla S1
