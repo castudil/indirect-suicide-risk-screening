@@ -308,7 +308,7 @@ def e6_distal():
     allc = list(X.columns)
     sets = {
         "Distal factors (personal and family history)":
-            [c for c in allc if c.startswith(("tto_", "sui_", "suicidio_", "repeticion"))],
+            [c for c in allc if c.startswith(("tto_", "sui_", "suicidio_", "repetici"))],
         "Distal + demographics":
             [c for c in allc if c in kinds["non_psychometric"]],
         "Classical scales, item level (PHQ-8+GAD-7+BHS)":

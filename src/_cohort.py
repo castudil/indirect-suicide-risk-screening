@@ -43,7 +43,7 @@ def load_cohort(csv_path="datos.csv"):
     `clusters` retains the school identifier, which the original pipeline
     discarded and which is required for leave-one-school-out validation.
     """
-    df = pd.read_csv(csv_path, delimiter=";", encoding="latin1")
+    df = pd.read_csv(csv_path, delimiter=",", encoding="latin1")
     df.columns = df.columns.str.strip()
 
     clusters_raw = df["establecimiento"].copy()

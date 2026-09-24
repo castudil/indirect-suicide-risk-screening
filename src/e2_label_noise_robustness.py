@@ -47,7 +47,7 @@ def log(msg=""):
 
 
 # ------------------------------------------------------------------ DATA
-df = pd.read_csv("datos.csv", delimiter=";", encoding="latin1")
+df = pd.read_csv("datos.csv", delimiter=",", encoding="latin1")
 df.columns = df.columns.str.strip()
 df.drop(["id", "fecha_0", "curso", "establecimiento", "grupo"], axis=1, inplace=True)
 df.drop(["phq9_total_0", "gad7_total_0", "cape-p15_total_0", "rps_total_0", "beck_total_0",
