@@ -29,6 +29,8 @@ from sklearn.metrics import average_precision_score, fbeta_score, recall_score
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 
+from _cohort import read_source
+
 RANDOM_STATE = 42
 N_REPS = 100
 NOISE_LEVELS = [0.0, 0.10, 0.20, 0.30, 0.39]
@@ -47,8 +49,7 @@ def log(msg=""):
 
 
 # ------------------------------------------------------------------ DATA
-df = pd.read_csv("datos.csv", delimiter=",", encoding="latin1")
-df.columns = df.columns.str.strip()
+df = read_source("datos.csv")
 df.drop(["id", "fecha_0", "curso", "establecimiento", "grupo"], axis=1, inplace=True)
 df.drop(["phq9_total_0", "gad7_total_0", "cape-p15_total_0", "rps_total_0", "beck_total_0",
          "cape-p15_pi_0", "cape-p15_be_0", "cape-p15_pa_0", "cbt_ac_0", "cbt_rc_0",

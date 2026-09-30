@@ -11,10 +11,14 @@ revision of the wording is versioned alongside the code that produces the table.
 Usage:  python make_supplementary.py
 """
 
+import os
+
 import pandas as pd
 from _audit import Run
 
-OUT = "../paper/supplementary.tex"
+# Writes into the manuscript tree when it is present, which is how it is run by the
+# authors; a clone of this repository alone has no ../paper, so it falls back to results/.
+OUT = "../paper/supplementary.tex" if os.path.isdir("../paper") else "results/supplementary.tex"
 
 # ------------------------------------------------------------ English renderings
 EN = {
@@ -24,7 +28,7 @@ EN = {
     "PHQ8_Item_6": "Feeling bad about oneself; feeling like a failure or having let others down",
     "PHQ8_Item_8": "Psychomotor retardation or agitation noticeable to others",
     "GAD7_Item_2": "Not being able to stop or control worrying",
-    "CAPE15_Item_1": "Feeling that some people are not what they seem to be",
+    "CAPE15_Item_2": "Feeling that some people are not what they seem to be",
     "CAPE15_Item_3": "Feeling as if one is being persecuted in some way",
     "CAPE15_Item_5": "Feeling that people look at one oddly because of one's appearance",
     "CAPE15_Item_8": "Feeling as if one's thoughts were not one's own",
@@ -45,7 +49,7 @@ EN = {
     "BHS_Item_16": "Never getting what one wants, so wanting anything is pointless",
     "BHS_Item_18": "The future seems vague and uncertain",
     "ERQ_Item_3": "Thinking about something else in order to feel less bad",
-    "ERQ_Item_8": "Being careful not to show negative feelings",
+    "ERQ_Item_8": "Changing how a situation is construed in order to feel better",
     "CBTSQ_Item_4": "Motivating oneself by doing things",
     "CBTSQ_Item_7": "Communicating one's needs effectively",
     "CBTSQ_Item_14": "Noticing negative thought patterns as they occur",
@@ -58,7 +62,11 @@ INSTRUMENT = {"PHQ8": "PHQ-8", "GAD7": "GAD-7", "CAPE15": "CAPE-P15", "SPSIR": "
               "BHS": "BHS", "ERQ": "ERQ-CA", "CBTSQ": "CBT-SQ", "BIO": "Contextual"}
 
 # Fixes two labels that the source file left as raw column names.
-RELABEL = {"cape-p15_15_0": "CAPE15_Item_15", "cbt_14_0": "CBTSQ_Item_14"}
+# The third entry corrects an item number: the results file labels the column
+# "cape-p15_1_2" as CAPE-P15 item 1 because its name carries a typo, but the column
+# holds item 2. Applied before the joins, so the tables downstream use the right number.
+RELABEL = {"cape-p15_15_0": "CAPE15_Item_15", "cbt_14_0": "CBTSQ_Item_14",
+           "CAPE15_Item_1": "CAPE15_Item_2"}
 # Label -> raw column map, needed to join with selection stability.
 RAW = {"PHQ8_Item_%d" % i: "phq9_%d_0" % i for i in range(1, 9)}
 RAW |= {"GAD7_Item_%d" % i: "gad7_%d_0" % i for i in range(1, 8)}
@@ -67,7 +75,12 @@ RAW |= {"SPSIR_Item_%d" % i: "rps_%d_0" % i for i in range(1, 26)}
 RAW |= {"BHS_Item_%d" % i: "beck_%d_0" % i for i in range(1, 21)}
 RAW |= {"ERQ_Item_%d" % i: "erq_%d_0" % i for i in range(1, 11)}
 RAW |= {"CBTSQ_Item_%d" % i: "cbt_%d_0" % i for i in range(1, 17)}
-RAW |= {"CAPE15_Item_1": "cape-p15_1_2", "CAPE15_Item_13": "cape-pe15_13_0",
+# The source file names CAPE-P15 item 2 "cape-p15_1_2" and item 13 "cape-pe15_13_0";
+# both are typos in the column header, not in the data. An earlier version read the
+# first digit of "cape-p15_1_2" as the item number and labelled it item 1, which is the
+# item about hints and double meanings. The column holds item 2, about people not being
+# what they seem, so it is labelled accordingly here.
+RAW |= {"CAPE15_Item_2": "cape-p15_1_2", "CAPE15_Item_13": "cape-pe15_13_0",
         "CBTSQ_Item_14": "cbt_14_0",
         "BIO_Patient_Prior_Treatment": "tto_previo",
         "BIO_Family_Prior_Treatment": "tto_familiar_previo",

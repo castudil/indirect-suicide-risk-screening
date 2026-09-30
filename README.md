@@ -28,9 +28,11 @@ structure is fully specified even without the data.
 ```bash
 python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
-cd src
-python _cohort.py          # replication check: must print 7 OK lines before anything else
-python p1_experiments.py   # all experiments; writes to ../results/
+# run from the repository root: every script resolves datos.csv and results/ relative to it
+python src/_cohort.py                    # replication check: must print 7 OK lines before anything else
+python src/e2_label_noise_robustness.py  # label-noise simulation; P1-E8 consumes its output
+python src/p1_experiments.py             # all experiments; writes to results/
+python src/verify_item_coding.py         # checks each data column against its item content
 ```
 
 `_cohort.py` is the single source of truth for ingestion, cleaning and partitioning. Its `verify()`
@@ -49,8 +51,13 @@ it claims. Two files carry this:
 To confirm that no result file has changed since it was generated:
 
 ```bash
-cd src && python _audit.py verify
+python src/_audit.py verify
 ```
+
+`make_supplementary.py` writes the supplementary tables into the manuscript tree, which is not
+part of this repository. The manifest committed here therefore records that one artefact at a
+path a fresh clone does not have, and `_audit.py verify` reports it as missing until the script
+is run locally. Every artefact under `results/` verifies.
 
 ## Layout
 
@@ -62,6 +69,7 @@ src/
   p1_experiments.py               the ten reported experiments (E1–E10)
   e2_label_noise_robustness.py    label-noise injection; source of the robustness result
   make_supplementary.py           generates the supplementary tables
+  verify_item_coding.py           checks each data column against its item content
 results/                          aggregate outputs only; no individual-level data
 ```
 

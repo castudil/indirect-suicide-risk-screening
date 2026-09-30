@@ -37,14 +37,28 @@ EXPECTED = {"n_total": 1539, "n_train": 1077, "n_test": 462,
             "n_nonzero_coefs": 35}
 
 
+def read_source(csv_path="datos.csv"):
+    """Read the source file, tolerating both delimiter conventions.
+
+    The file has circulated both semicolon- and comma-delimited depending on how
+    it was exported, so the delimiter is sniffed from the header rather than
+    hard-coded; editing it per machine is what a replication must not require.
+    """
+    with open(csv_path, encoding="latin1") as handle:
+        header = handle.readline()
+    delimiter = ";" if header.count(";") > header.count(",") else ","
+    df = pd.read_csv(csv_path, delimiter=delimiter, encoding="latin1")
+    df.columns = df.columns.str.strip()
+    return df
+
+
 def load_cohort(csv_path="datos.csv"):
     """Return (X, y, siq, clusters) after complete-case cleaning.
 
     `clusters` retains the school identifier, which the original pipeline
     discarded and which is required for leave-one-school-out validation.
     """
-    df = pd.read_csv(csv_path, delimiter=",", encoding="latin1")
-    df.columns = df.columns.str.strip()
+    df = read_source(csv_path)
 
     clusters_raw = df["establecimiento"].copy()
     df = df.drop(["id", "fecha_0", "curso", "establecimiento", "grupo"], axis=1)

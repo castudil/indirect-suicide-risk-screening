@@ -163,7 +163,7 @@ def e3_dca():
     cal = CalibratedClassifierCV(estimator=clf_main, method="isotonic", cv=5).fit(Atr, y_tr)
     p_cal = cal.predict_proba(Ate)[:, 1]
 
-    distal = [c for c in X.columns if c.startswith(("tto_", "sui_", "suicidio_", "repeticion"))]
+    distal = [c for c in X.columns if c.startswith(("tto_", "sui_", "suicidio_", "repetici"))]
     sc_d = StandardScaler().fit(Xtr[distal])
     p_distal = LogisticRegression(**C.L1_PARAMS).fit(sc_d.transform(Xtr[distal]), y_tr) \
         .predict_proba(sc_d.transform(Xte[distal]))[:, 1]

@@ -6,6 +6,16 @@ the verbatim instrument as presented to participants, and rendering it in Englis
 misrepresent what was actually asked. English renderings used in the manuscript tables
 are kept separately, in make_supplementary.py.
 
+Note on the ERQ: items 8 and 9 were transcribed the wrong way round in an earlier
+version of this dictionary. The administered instrument, the source codebook
+(variables.csv) and the data all agree that item 8 is the cognitive-reappraisal item
+("Controlo mis emociones ... cambiando la forma en que pienso en ellas") and item 9 the
+expressive-suppression item ("... me preocupo de no mostrarlo"), which is the numbering
+of the adult ERQ rather than that of the ERQ-CA. Corrected here on 2026-09-30 after the
+discrepancy was detected empirically; see verify_item_coding.py. The data were never
+affected: the subscale totals in the source file reconstruct exactly under this key, and
+the models use individual items and are indifferent to the labels.
+
 Note on the CBT-SQ: the administered form omits items 13 and 15 of the original 16-item
 instrument. The analysis pipeline renames the remaining columns to the original
 numbering; the keys here use the ADMINISTERED numbering, so cbt_13_0 below corresponds
@@ -133,8 +143,8 @@ questionnaire = {
     "erq_5_0": "Cuando estoy preocupado(a) por algo, trato de pensar en ello de una manera que me ayude a sentir mejor",
     "erq_6_0": "Controlo mis emociones no mostrándolas",
     "erq_7_0": "Cuando quiero sentirme mejor por algo (por ejemplo, más alegre o divertido), cambio lo que pienso sobre ello",
-    "erq_8_0": "Cuando me estoy sintiendo mal (por ejemplo, triste, enojado(a) o preocupado(a)), me preocupo de no mostrarlo",
-    "erq_9_0": "Controlo mis emociones sobre las cosas cambiando la forma en que pienso en ellas",
+    "erq_8_0": "Controlo mis emociones sobre las cosas cambiando la forma en que pienso en ellas",
+    "erq_9_0": "Cuando me estoy sintiendo mal (por ejemplo, triste, enojado(a) o preocupado(a)), me preocupo de no mostrarlo",
     "erq_10_0": "Cuando me quiero sentir menos mal por algo (por ejemplo, menos triste, enojado o preocupado), cambio la manera de pensar sobre ello",
     "erc_rc_0": "suma 1,3,5,7,8,10 (Reevaluación cognitiva)",
     "er_es_0": "suma 2,4,6,9 (Supresión emocional)",
